@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceeley Richela - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Adjusted profile photo style for direct image source */
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1); /* Fallback background */
+            display: flex; /* Changed from block to flex to center the img */
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            overflow: hidden; /* Hide overflowing parts of the image */
+            position: relative; /* Needed for absolute positioning of child elements */
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the div without stretching */
+            border-radius: 50%; /* Maintain circular shape */
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #95a0ff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Education & Skills */
+        .education-skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .education-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .education-period {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image-container {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Removed project-image-placeholder as it's for upload */
+        /* Removed project-image-placeholder styles */
+
+        .project-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(102, 126, 234, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+
+        .project-image-container:hover .project-image-overlay {
+            display: flex;
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .project-features {
+            margin-top: 1rem;
+        }
+
+        .project-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-features li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+        }
+
+        .project-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .image-modal-close:hover {
+            color: #ffd700;
+        }
+
+        /* Gallery for projects with multiple images */
+        /* Removed .project-gallery as it's not used with direct image input */
+        /* Removed .main-image as it's not used with direct image input */
+        /* Removed .thumbnail-grid as it's not used with direct image input */
+        /* Removed .thumbnail as it's not used with direct image input */
+        /* Removed .more-images as it's not used with direct image input */
+
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .research-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .research-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .research-title {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .research-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Contact Section - Adjusted for visibility */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; /* Changed for better visibility */
+            text-align: center;
+        }
+
+        #contact .container {
+            color: white; /* Ensure container text is also white */
+        }
+
+        #contact .section-title {
+            color: white; /* Keep the title "Mari Berkolaborasi" white */
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #ffd700;
+        }
+
+        .contact-item a { /* Style for contact links */
+            color: white; /* Ensure links are white on the gradient background */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #ffd700; /* Change color on hover */
+        }
+
+        /* Footer */
+        .footer {
+            background: #212529; /* Changed from #333 to a slightly different dark shade */
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .education-skills {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Removed photo upload overlay as it's for upload */
+        /* .photo-upload-overlay { ... } */
+        /* Removed .profile-photo:hover .photo-upload-overlay { ... } */
+        /* Removed .profile-photo { position: relative; overflow: hidden; } if it was only for overlay */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="container">
+            <div class="nav">
+                <div class="logo">Ceeley Richela</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-photo">
+                    <img src="ceeley-r.jpg" alt="Profile Photo">
+                </div>
+                <h1>Ceeley Richela</h1>
+                <p class="hero-subtitle">Mahasiswi Informatika • Pradita University</p>
+                <p class="hero-description">
+                    Saya adalah mahasiswi semester 2 yang passionate dalam pengembangan aplikasi, website, dan pengolahan data.
+                    Percaya bahwa pembelajaran terbaik datang dari praktik langsung dan eksplorasi proyek nyata.
+                </p>
+                <a href="#projects" class="cta-button">Lihat Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="education-skills">
+                <div>
+                    <h3 style="margin-bottom: 2rem; color: #667eea;">Pendidikan</h3>
+                    <div class="education-item">
+                        <div class="education-period">2024 - Sekarang</div>
+                        <h4>Pradita University</h4>
+                        <p>Program Studi Informatika, Fakultas Sains dan Teknologi<br>Semester 2</p>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-period">2021 - 2024</div>
+                        <h4>SMAS Tarsisius 1</h4>
+                        <p>Peminatan Matematika dan Ilmu Pengetahuan Alam (MIPA)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 2rem; color: #667eea;">Keahlian</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="fas fa-code"></i> Technical Skills</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">MySQL</span>
+                                <span class="skill-tag">HTML & CSS</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">PHP</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-user"></i> Personal Skills</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Problem Solving</span>
+                                <span class="skill-tag">Fast Learner</span>
+                                <span class="skill-tag">Teamwork</span>
+                                <span class="skill-tag">Detail Oriented</span>
+                                <span class="skill-tag">Time Management</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h4><i class="fas fa-globe"></i> Languages</h4>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Bahasa (Native)</span>
+                                <span class="skill-tag">English (C1)</span>
+                                <span class="skill-tag">Mandarin (HSK3)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Portfolio Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image-container" onclick="openImageModal('la-admin.png')">
+                        <img src="la-admin.png" alt="La Clustre Project">
+                        <div class="project-image-overlay">
+                            <span>Click to view full size</span>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">La Clustre</h3>
+                        <p class="project-tech">PHP • Tailwind CSS • MySQL</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Website pelaporan yang terhubung dengan database untuk memantau berbagai permasalahan di lingkungan cluster.
+                        </p>
+                        <div class="project-features">
+                            <strong>Peran: Pengembang Modul Admin</strong>
+                            <ul>
+                                <li>Manajemen akun dan hak akses pengguna</li>
+                                <li>Validasi dan tindak lanjut laporan dari warga</li>
+                                <li>Dashboard dengan ringkasan data laporan</li>
+                                <li>Fungsi aktivasi/deaktivasi akun</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-container" onclick="openImageModal('butter.png')">
+                        <img src="butter.png" alt="BUTTER Project">
+                        <div class="project-image-overlay">
+                            <span>Click to view full size</span>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">BUTTER: Budget Tracker</h3>
+                        <p class="project-tech">Java 22 • JavaFX • MySQL • JDBC</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Aplikasi berbasis Java yang membantu pengguna mengelola keuangan pribadi dengan mencatat pemasukan, pengeluaran, dan mengatur anggaran.
+                        </p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Pengelolaan keuangan berdasarkan kategori</li>
+                                <li>Pengaturan limit anggaran</li>
+                                <li>Tipe akun usaha atau personal</li>
+                                <li>MVC Architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-container" onclick="openImageModal('CoA.png')">
+                        <img src="CoA.png" alt="Chart of Account Project">
+                        <div class="project-image-overlay">
+                            <span>Click to view full size</span>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Chart of Account Management</h3>
+                        <p class="project-tech">Java • JavaFX • Hibernate • MariaDB</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Sistem manajemen akuntansi dengan fitur CRUD komprehensif dan validasi input yang ketat.
+                        </p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Operasi CRUD dengan Hibernate ORM</li>
+                                <li>Formulir dinamis & validasi input</li>
+                                <li>Penyesuaian saldo otomatis</li>
+                                <li>Strategy Design Pattern</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-container" onclick="openImageModal('js.png')">
+                        <img src="js.png" alt="Responsive Website Project">
+                        <div class="project-image-overlay">
+                            <span>Click to view full size</span>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Responsive Website</h3>
+                        <p class="project-tech">HTML • CSS • JavaScript</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Website sederhana dan responsif dengan fungsionalitas dasar dan desain antarmuka yang bersih.
+                        </p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Elemen interaktif</li>
+                                <li>Pembaruan konten dinamis</li>
+                                <li>Desain responsif</li>
+                                <li>UI yang user-friendly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="section">
+        <div class="container">
+            <h2 class="section-title">Artikel Jurnal</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <h3 class="research-title">
+                        <a href="menyusul, sedang dipublish" target="_blank" style="color: inherit; text-decoration: none;">
+                            Sistem Pembuatan Rencana Makan Berbasis Web
+                        </a>
+                    </h3>
+                    <p class="research-description">
+                        Penulisan jurnal ilmiah yang mengevaluasi efektivitas sistem pembuatan rencana makan berbasis web bagi mahasiswa indekos.
+                        Sistem dibangun menggunakan Next.js dan terintegrasi dengan Spoonacular API untuk menyusun menu berdasarkan kebutuhan nutrisi.
+                    </p>
+                </div>
+                <div class="research-card">
+                    <h3 class="research-title">
+                        <a href="https://pancasilagroup1.wixsite.com/informatika24" target="_blank" style="color: inherit; text-decoration: none;">
+                            Analisis Fenomena Brainrot pada Mahasiswa
+                        </a>
+                    </h3>
+                    <p class="research-description">
+                        Artikel penelitian kuantitatif yang mengkaji fenomena brainrot, yaitu penurunan mental atau intelektual akibat paparan konten digital berlebihan.
+                        Studi menganalisis dampak overstimulasi konten game streaming YouTube terhadap kemampuan berpikir kritis mahasiswa dan relevansinya dengan Sila Kedua Pancasila.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="section-title">Mari Berkolaborasi</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                Saya terbuka untuk kesempatan kolaborasi, pembelajaran, maupun pengalaman baru di dunia teknologi
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:ceeley.richela@student.pradita.ac.id">ceeley.richela@student.pradita.ac.id</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/ceeley-richela-657421297" target="_blank">Ceeley Richela</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/ceeleyr" target="_blank">github.com/ceeleyr</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ceeley Richela. Designed with passion for technology.</p>
+        </div>
+    </footer>
+
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <img id="modalImage" src="" alt="Project Image">
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.color = '#333';
+                header.querySelectorAll('a, .logo').forEach(el => {
+                    el.style.color = '#333';
+                });
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.color = 'white';
+                header.querySelectorAll('a, .logo').forEach(el => {
+                    el.style.color = 'white';
+                });
+            }
+        });
+
+        // Image modal functions (kept as they are useful for viewing existing images)
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImage.src = imageSrc;
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        // Make functions global
+        window.openImageModal = openImageModal;
+        window.closeImageModal = closeImageModal;
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all project cards and other elements
+        document.querySelectorAll('.project-card, .education-item, .skill-category, .research-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
